@@ -1,117 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
-    <title>STATS - Amazing events</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
-<body>
-    <header>
-      <nav class="navbar navbar-inverse bg-secondary">
-        <div class="container-fluid">
-          <div class="navbar-header bg-light rounded p-1">
-            <a href="./index.html"><img src="./assets/images/Logo.png" alt="logo" id="logo" title="Go home" /></a>
-          </div>
-            <ul class="m-4 gap-3 nav navbar-nav d-flex flex-sm-row flex-column">
-              <li class="active"><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./index.html">Home</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./upcoming.html">Upcoming Events</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./pastevents.html">Past Events</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./contact.html">Contact</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="#">Stats</a></li>
-            </ul>
-        </div>
-      </nav>
-    </header>
-    
-   
-        <section class="heading-h1 d-flex justify-content-center align-items-center">
-          <h1 class="text-light">Stats</h1>
-        </section>
 
-      
-        
-          
-        <main id="app" class="d-flex justify-content-center align-items-center">
-          <div class="table-lists">
-              <table class="table-one">
-                  <thead>
-                      <tr>
-                          <th colspan="3" class="title-table">Events statistics</th>
-                      </tr>
-                      <tr class="thead-titles">
-                        <td>Event with the highest percentage of attendance</td>
-                        <td> Event with the lowest percentage of attendance</td>
-                        <td>Event with larger capacity</td> 
-                    </tr>
-                  </thead>
-                  <tbody > 
-                    <tr v-if = "maxMinPercentage.length">
-                      <td> {{maxMinPercentage[0].name + maxMinPercentage[0].percentage}} </td>
-                      <td> {{maxMinPercentage[1].name + maxMinPercentage[1].percentage}}</td>
-                      <td> {{maxMinPercentage[2].name + maxMinPercentage[2].capacity}}</td>
-                    </tr> 
-                  </tbody>
-              </table>
-              <table>
-                  <thead>
-                      <tr>
-                          <th colspan="3" class="title-table">Upcoming events statistics by category</th>
-                      </tr>
-                      <tr class="thead-titles">
-                        <td>Categories</td>
-                        <td>Revenues</td>
-                        <td>Percentage of attendance
-                        </td>
-                      </tr>
-                  </thead>
-                  <tbody >
-                      <tr v-for = "event of upcomingFiltered">
-                          <td>{{event.category}}</td>
-                          <td>$ {{revenues(event.estimate, event.price)}}</td>
-                          <td>{{percentageOfAttendance(event.capacity, event.estimate)}}%</td>
-                      </tr>
-  
-                  </tbody>
-              </table>
-              <table>
-                  <thead>
-                      <tr>
-                          <th colspan="3" class="title-table">Past Events statistics by category</th>
-                      </tr>
-                      <tr class="thead-titles">
-                        <td>Categories</td>
-                        <td>Revenues</td>
-                        <td>Percentage of attendance</td>
-                      </tr>
-                  </thead>
-                  <tbody >
-                      <tr v-for = "event of pastFiltered">
-                          <td>{{event.category}}</td>
-                          <td>$ {{revenues(event.assistance, event.price)}}</td>
-                          <td>{{percentageOfAttendance(event.capacity, event.assistance)}}%</td>
-                      </tr>
-                      
-                  </tbody>
-              </table>
-          </div>
-      </main>
-    
-    <footer>
-      <figure class="d-flex">
-        <a class="p-2" href="https://www.instagram.com" target="_blank"><img src="./assets/images/insta.png" alt="logo-insta" class="bg-light rounded social"></a>
-        <a class="p-2" href="https://www.facebook.com" target="_blank"><img src="./assets/images/face.png" alt="logo-facebook" class="bg-light social"></a>
-        <a class="p-2" href="https://web.whatsapp.com/" target="_blank"><img src="./assets/images/wasap.png" alt="logo-whatsapp" class="bg-light rounded-circle social"></a>
-      </figure>
-      <div>
-        <p>Cohort</p>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
+  <title>STATS - Amazing events</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700,900" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/0e29a92e8b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <div class="head_container">
+      <div class="logo">
+        <img src="./assets/images/Logo.png">
       </div>
-    </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>  
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-<script src="./js/stats.js"></script>
+      <div class="menu" id="myTopnav">
+        <ul>
+          <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="openNav()">&#9776;</a>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./pastevents.html">Past Events</a></li>
+          <li><a href="#">Upcoming Events</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="./stats.html">Stats</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="./index.html">Home</a>
+    <a href="./pastevents.html">Past Events</a>
+    <a href="./#">Upcoming Events</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./stats.html">Stats</a>
+    <p style="color: #dee3ea; text-align: center; text-shadow: 1px 1px 10px black;font-weight: bold;">Dferprojects
+      &copy; 2023</p>
+  </div>
+  <section class="heading-h1 d-flex justify-content-center align-items-center">
+    <h1 class="text-light">Stats</h1>
+  </section>
+
+  <main id="app">
+    <div class="table-lists">
+      <table class="table-one">
+        <thead>
+          <tr>
+            <th colspan="3" class="title-table">Events statistics</th>
+          </tr>
+          <tr class="thead-titles">
+            <td>Event with the highest percentage of attendance</td>
+            <td> Event with the lowest percentage of attendance</td>
+            <td>Event with larger capacity</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-if="maxMinPercentage.length">
+            <td> {{maxMinPercentage[0].name + maxMinPercentage[0].percentage}} </td>
+            <td> {{maxMinPercentage[1].name + maxMinPercentage[1].percentage}}</td>
+            <td> {{maxMinPercentage[2].name + maxMinPercentage[2].capacity}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="3" class="title-table">Upcoming events statistics by category</th>
+          </tr>
+          <tr class="thead-titles">
+            <td>Categories</td>
+            <td>Revenues</td>
+            <td>Percentage of attendance
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="event of upcomingFiltered">
+            <td>{{event.category}}</td>
+            <td>$ {{revenues(event.estimate, event.price)}}</td>
+            <td>{{percentageOfAttendance(event.capacity, event.estimate)}}%</td>
+          </tr>
+
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="3" class="title-table">Past Events statistics by category</th>
+          </tr>
+          <tr class="thead-titles">
+            <td>Categories</td>
+            <td>Revenues</td>
+            <td>Percentage of attendance</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="event of pastFiltered">
+            <td>{{event.category}}</td>
+            <td>$ {{revenues(event.assistance, event.price)}}</td>
+            <td>{{percentageOfAttendance(event.capacity, event.assistance)}}%</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <div class="d-flex justify-content-evenly">
+      <div><img src="./assets/images/elmo.gif" alt="elmo">
+      </div>
+      <div class="contact d-flex flex-column justify-content-center align-items-center gap-2">
+        <h5>CONTACT ME!</h5>
+        <div class="d-flex gap-3">
+          <a href="https://www.linkedin.com/in/leojara-it/" target="_blank" class="fa-brands fa-linkedin"></a>
+          <a href="https://github.com/Dferprojects" target="_blank" class="fa-brands fa-github"></a>
+          <a href="https://www.instagram.com/leo.fjara/" target="_blank" class="fa-brands fa-instagram"></a>
+        </div>
+      </div>
+    </div>
+    <div class="copy d-flex justify-content-center align-items-center">
+      <h6>&copy; 2023 - Sitio web desarrollado por Dferprojects</h6>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./js/hamburguesa.js"></script>
+  <script src="./js/stats.js"></script>
 </body>
+
 </html>

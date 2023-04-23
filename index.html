@@ -8,40 +8,50 @@
     <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
     <title>HOME - Amazing events</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700,900" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0e29a92e8b.js" crossorigin="anonymous"></script>    
+
+  </head>
 <body>
   
-  <div id="app">
-    
-    
-    <header>
-      <nav class="navbar navbar-inverse bg-secondary">
-        <div class="container-fluid">
-          <div class="navbar-header bg-light rounded p-1">
-            <a href="./index.html"><img src="./assets/images/Logo.png" alt="logo" id="logo" title="Go home" /></a>
-          </div>
-            <ul class="m-4 gap-3 nav navbar-nav d-flex flex-sm-row flex-column">
-              <li class="active"><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="#">Home</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./upcoming.html">Upcoming Events</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./pastevents.html">Past Events</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./contact.html">Contact</a></li>
-              <li><a class="border rounded m-2 p-1 bg-light text-dark text-decoration-none" href="./stats.html">Stats</a></li>
-            </ul>
-        </div>
-      </nav>
-    </header>
-    
-   
-        <section class="heading-h1 d-flex justify-content-center align-items-center">
-          <h1 class="text-light">Home</h1>
-        </section>
-        
-        <main id="app">
+  <header>
+    <div class="head_container">
+      <div class="logo">
+        <img src="./assets/images/Logo.png">
+      </div>
+      <div class="menu" id="myTopnav">
+        <ul>
+          <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="openNav()">&#9776;</a>
+          <li><a href="#">Home</a></li>
+          <li><a href="./pastevents.html">Past Events</a></li>
+          <li><a href="./upcoming.html">Upcoming Events</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="./stats.html">Stats</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">Home</a>
+      <a href="./pastevents.html">Past Events</a>
+      <a href="./upcoming.html">Upcoming Events</a>
+      <a href="./contact.html">Contact</a>
+      <a href="./stats.html">Stats</a>
+      <p style="color: #dee3ea; text-align: center; text-shadow: 1px 1px 10px black;font-weight: bold;">Dferprojects &copy; 2023</p>
+  </div>
+  
+  <section class="heading-h1 d-flex justify-content-center align-items-center">
+    <h1 class="text-light">Home</h1>
+  </section>
+  
+  <main id="app" class="pb-5">
 
             <!-- checkbox -->
 
-          <nav class="category-search">
-            <div class="categories checkbtn d-flex flex-wrap flex-md-row justify-content-evenly">
+          <div class="category-search">
+            <div class="categories d-flex flex-wrap justify-content-evenly">
               <div class="form-check form-check-inline mt-3 " v-for = "category of filteredCategories">
                 <label class="form-check-label" >{{category}}
                 <input  v-model="checked" @change="crossFilter"  class="form-check-input" type="checkbox" id="" :value="category">
@@ -54,12 +64,12 @@
             <form  class="search" role="search">
               <input v-model="searchValue" @keyup="crossFilter" class="form-control" type="search" placeholder="Search..." aria-label="Search"> 
             </form>
-          </nav>
+          </div>
               
           <!-- cards sections -->
 
           <template v-if="filteredEvents.length > 0">
-            <div id="cards-section" class="cards-section d-flex flex-wrap justify-content-center gap-3 m-1" >
+            <div id="cards-section" class="cards-section d-flex flex-wrap justify-content-center gap-3" >
               <div class="card" style="width: 18rem;" v-for = "event of filteredEvents">
                 <figure id="cardImg">
                   <img :src="event.image" class="card-img" :alt="event.name">
@@ -79,29 +89,31 @@
           </template>
           <template v-else>
             <div class="d-flex justify-content-center">
-             <h4>ERROR 404 NOT FOUND</h4>
+              <h4>ERROR 404 NOT FOUND</h4>
           </template>
-          
-          
-        </main>
+  </main>
   
-    
-    <footer>
-      <figure class="d-flex">
-        <a class="p-2" href="https://www.instagram.com" target="_blank"><img src="./assets/images/insta.png" alt="logo-insta" class="bg-light rounded social"></a>
-        <a class="p-2" href="https://www.facebook.com" target="_blank"><img src="./assets/images/face.png" alt="logo-facebook" class="bg-light social"></a>
-        <a class="p-2" href="https://web.whatsapp.com/" target="_blank"><img src="./assets/images/wasap.png" alt="logo-whatsapp" class="bg-light rounded-circle social"></a>
-      </figure>
-      <div>
-        <p>Cohort 41</p>
+  <footer>
+    <div class="d-flex justify-content-evenly">  
+      <div><img src="./assets/images/elmo.gif" alt="elmo">
       </div>
-    </footer>
-  </div>
+      <div class="d-flex flex-column justify-content-center align-items-center gap-2">
+          <h5>CONTACT ME!</h5>
+          <div class="d-flex gap-3">
+              <a href="https://www.linkedin.com/in/leojara-it/" target="_blank" class="fa-brands fa-linkedin"></a>
+              <a href="https://github.com/Dferprojects" target="_blank" class="fa-brands fa-github"></a>
+              <a href="https://www.instagram.com/leo.fjara/" target="_blank" class="fa-brands fa-instagram"></a>
+          </div>
+      </div>
+    </div>
+    <div class="copy d-flex justify-content-center align-items-center">
+        <h6>&copy; 2023 - Sitio web desarrollado por Dferprojects</h6>
+    </div>
+  </footer>
    
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>   
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="./js/hamburguesa.js"></script>
 <script src="js/index.js"></script>
-
-
 </body>
 </html>
